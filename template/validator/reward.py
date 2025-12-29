@@ -13,7 +13,7 @@ def reward(response: Optional[Dummy]) -> float:
         bt.logging.info("Reward: response is None")
         return 0.0
 
-    github_url = getattr(response, "github_url", None)
+    github_url = response
 
     if github_url and isinstance(github_url, str) and github_url.startswith("https://github.com"):
         bt.logging.info(f"Reward: valid github_url received: {github_url}")

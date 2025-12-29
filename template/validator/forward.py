@@ -3,7 +3,7 @@ import bittensor as bt
 from template.protocol import Dummy
 from template.validator.reward import get_rewards
 from template.utils.uids import get_random_uids
-from template.validator.agent_runner import run_github_agent
+from template.validator.agent_runner import wrun_github_agent
 
 
 async def forward(self):
@@ -26,7 +26,7 @@ async def forward(self):
     bt.logging.info(f"Received responses: {responses}")
     for response in responses:
         if response is not None:
-            agent = run_github_agent(response)
+            agent = wrun_github_agent(response, "task.json", "output.json")
             if agent is not None:
                 bt.logging.info(f"Successfully loaded agent from {response}")
             else:
