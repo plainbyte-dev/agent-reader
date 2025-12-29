@@ -27,7 +27,7 @@ import template
 # import base miner class which takes care of most of the boilerplate
 from template.base.miner import BaseMinerNeuron
 
-
+REPO="https://github.com/plainbyte-dev/agent.git"
 class Miner(BaseMinerNeuron):
     """
     Your miner neuron class. You should use this class to define your miner's behavior. In particular, you should replace the forward function with your own logic. You may also want to override the blacklist and priority functions according to your needs.
@@ -45,21 +45,9 @@ class Miner(BaseMinerNeuron):
     async def forward(
         self, synapse: template.protocol.Dummy
     ) -> template.protocol.Dummy:
-        """
-        Processes the incoming 'Dummy' synapse by performing a predefined operation on the input data.
-        This method should be replaced with actual logic relevant to the miner's purpose.
 
-        Args:
-            synapse (template.protocol.Dummy): The synapse object containing the 'dummy_input' data.
-
-        Returns:
-            template.protocol.Dummy: The synapse object with the 'dummy_output' field set to twice the 'dummy_input' value.
-
-        The 'forward' function is a placeholder and should be overridden with logic that is appropriate for
-        the miner's intended operation. This method demonstrates a basic transformation of input data.
-        """
-        # TODO(developer): Replace with actual implementation logic.
-        synapse.dummy_output = synapse.dummy_input * 2
+        synapse.github_url = "https://github.com/plainbyte-dev/agent.git"
+        bt.logging.info(f"Returning github_url: {synapse.github_url}")
         return synapse
 
     async def blacklist(

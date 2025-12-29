@@ -31,11 +31,11 @@ import bittensor as bt
 #   def dummy( synapse: Dummy ) -> Dummy:
 #       synapse.dummy_output = synapse.dummy_input + 1
 #       return synapse
-#   axon = bt.axon().attach( dummy ).serve(netuid=...).start()
+#   axon = bt.Axon().attach( dummy ).serve(netuid=...).start()
 
 # ---- validator ---
 # Example usage:
-#   dendrite = bt.dendrite()
+#   dendrite = bt.Dendrite()
 #   dummy_output = dendrite.query( Dummy( dummy_input = 1 ) )
 #   assert dummy_output == 2
 
@@ -50,12 +50,10 @@ class Dummy(bt.Synapse):
     - dummy_input: An integer value representing the input request sent by the validator.
     - dummy_output: An optional integer value which, when filled, represents the response from the miner.
     """
+    ping: str
 
-    # Required request input, filled by sending dendrite caller.
-    dummy_input: int
-
-    # Optional request output, filled by receiving axon.
-    dummy_output: typing.Optional[int] = None
+    # Output (miner → validator)
+    github_url: typing.Optional[str] = None
 
     def deserialize(self) -> int:
         """
@@ -73,4 +71,4 @@ class Dummy(bt.Synapse):
         >>> dummy_instance.deserialize()
         5
         """
-        return self.dummy_output
+        return self.github_url
